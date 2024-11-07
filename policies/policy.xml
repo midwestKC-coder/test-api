@@ -1,0 +1,37 @@
+name: Default Policy
+ 
+# codescanning:
+# level: notes
+ 
+# # Dependency Security Alters
+# dependabot:
+# level: high
+ 
+# # Dependency Licensing Alerts
+licensing:
+  conditions:
+    ids:
+      - GPL-*
+      - LGPL-*
+      - AGPL-*
+ 
+  warnings:
+    # Warning is the dependency isn't known
+    ids:
+      - Other
+      - NA
+ 
+# General Dependency Alerts
+dependencies:
+  conditions:
+    names:
+      # Dependency Name (manager + name), best to use as this makes sure that
+      #  the right package manager is used
+      - maven:com.dstsystems
+  warnings:
+    ids:
+      - Maintenance
+      - Organization
+ 
+# secretscanning:
+# level: all
