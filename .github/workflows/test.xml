@@ -1,0 +1,56 @@
+# https://github.com/advanced-security/policy-as-code
+
+name: Policy-as-Code-POC
+
+on:
+  workflow_dispatch:
+  pull_request:
+  
+permissions:
+  contents: read
+  security-events: read
+  # pull request summaries
+  pull-requests: write
+ 
+env:
+#   BUILD_NUMBER:  ${{ github.run_number }}
+#   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+#   CURRENT_COMMIT: ${{github.sha}}
+#   GIT_AUTHOR: ${{github.actor}}
+  ACTIONS_STEP_DEBUG: true
+  DEBUG: true
+
+jobs:
+  Testing-PAC:
+    runs-on: [ Linux ]
+    steps:
+        # - name: checkout
+        #   uses: actions/checkout@v3
+
+        # - name: Set Python3 Alias
+        #   run: Set-Alias -Name python3 -Value python
+
+        # - name: Check Python 3 version
+        #   run: |
+        #     Set-Alias -Name python3 -Value python
+        #     & python3 --version
+        #   shell: pwsh
+        - name: check python version
+          run: python3 --version
+
+        - name: Advanced Security Policy as Code
+          uses: Training/policy-as-code@main
+          with:
+            # severity: Notes
+            # The owner/repo of where the policy is stored
+            # policy: Training/test-re-pac-poc
+            # The local path (within the workspace) or repository
+            # policy-path: policies/policy.yml
+            # The branch you want to target
+            policy-branch: master
+            token: ${{ secrets.TEST_FINE }}
+            # [optional] Additional arguments
+            # --disable-code-scanning
+            #  --disable-dependencies --disable-dependabot --disable-dependency-licensing
+            #. --disable-secret-scanning
+            argvs: "--disable-dependabot --disable-dependencies --disable-secret-scanning --disable-code-scanning"
