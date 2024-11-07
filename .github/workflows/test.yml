@@ -39,7 +39,7 @@ jobs:
           run: python3 --version
 
         - name: Advanced Security Policy as Code
-          uses: advanced-security/policy-as-code@2.9.0
+          uses: advanced-security/policy-as-code@v2.9.0
           with:
             # severity: Notes
             # The owner/repo of where the policy is stored
